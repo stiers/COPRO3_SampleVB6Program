@@ -1,10 +1,10 @@
 Type=Exe
-Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\..\Windows\system32\stdole2.tlb#OLE Automation
-Object={67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0; MSADODC.OCX
-Reference=*\G{00000205-0000-0010-8000-00AA006D2EA4}#2.5#0#..\..\..\..\Program Files\Common Files\System\ado\msado25.tlb#Microsoft ActiveX Data Objects 2.5 Library
-Module=ModMain; ModMain.bas
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\..\..\Windows\system32\stdole2.tlb#OLE Automation
+Form=Forms\frmMain.frm
+Module=modMain; modMain.bas
 Object={5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0; MSFLXGRD.OCX
-Form=firstproject.vbp
+Object={67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0; MSADODC.OCX
+Reference=*\G{00000200-0000-0010-8000-00AA006D2EA4}#2.0#0#..\..\..\..\..\Program Files\Common Files\System\ado\msado20.tlb#Microsoft ActiveX Data Objects 2.0 Library
 Startup="Sub Main"
 HelpFile=""
 Command32=""
@@ -31,6 +31,3 @@ Unattended=0
 Retained=0
 ThreadPerObject=0
 MaxNumberOfThreads=1
-
-[MS Transaction Server]
-AutoRefresh=1

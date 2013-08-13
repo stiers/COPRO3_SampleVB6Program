@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Begin VB.Form frmMain 
-   Caption         =   "COPRO3_SampleVB6Program"
+   Caption         =   "Form1"
    ClientHeight    =   6390
    ClientLeft      =   2925
    ClientTop       =   2490
@@ -182,33 +182,11 @@ Private Sub btnClose_Click()
 
 End Sub
 
-Private Sub btnDelete_Click()
-
-    Delete txtStudentID, txtStudentName, cboStudentGender, txtStudentAge
-    Display grdMain
-    Clear
-
-End Sub
-
 Private Sub btnSave_Click()
 
     Add txtStudentID, txtStudentName, cboStudentGender, txtStudentAge
     Display grdMain
     Clear
-
-End Sub
-
-Private Sub btnUpdate_Click()
-
-    Update txtStudentID, txtStudentName, cboStudentGender, txtStudentAge
-    Display grdMain
-    Clear
-
-End Sub
-
-Private Sub cboStudentGender_KeyPress(KeyAscii As Integer)
-
-    KeyAscii = 0
 
 End Sub
 
@@ -222,9 +200,11 @@ End Sub
 Private Sub grdMain_Click()
 
     With grdMain
-
-        .Col = 0
-        .ColSel = .Cols - 1
+    
+        For x = 0 To .Cols - 1
+            .Col = x
+            .CellBackColor = &HC0C0FF
+        Next x
             
     End With
 
@@ -258,7 +238,7 @@ Sub Clear()
     Dim Control
     
     For Each Control In Me
-        If TypeOf Control Is TextBox Or TypeOf Control Is ComboBox Then
+        If TypeOf Control Is TextBox Then
             Control.Text = ""
         End If
     Next Control
@@ -283,4 +263,3 @@ Sub ColorGridRow()
     End With
 
 End Sub
-

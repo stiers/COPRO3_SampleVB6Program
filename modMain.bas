@@ -5,7 +5,6 @@ Public Con As ADODB.Connection
 Public sql As String
 
 Sub Main()
-
     Set Rs = New ADODB.Recordset
     Set Con = New ADODB.Connection
 
@@ -18,7 +17,6 @@ Sub Main()
     Con.Open m_Path
 
     frmMain.Show
-    
 End Sub
 
 ' Checks all controls if empty
@@ -31,13 +29,10 @@ Public Function Checker(frm As Form) As Boolean
     For Each Control In frm
         If TypeOf Control Is TextBox Or TypeOf Control Is ComboBox Then
             If Control.Text = vbNullString Then
-
                 If Control.Name = "Text4" Then GoTo fsChecker
-                
                 Checker = True
                 MsgBox "All fields required", vbCritical, "Message Alert!"
                 Exit Function
-                
             End If
         End If
     
@@ -51,11 +46,11 @@ Public Function Add(varStudentID, varStudentName, varStudentGender As String, va
 
     If Rs.State = 1 Then Rs.Close
     
-    sql = "SELECT * FROM tbl_student WHERE student_id = '" & varID & "'"
+    sql = "SELECT * FROM tbl_student WHERE student_id = '" & varStudentID & "'"
     
     Rs.Open sql, Con
     
-    x = MsgBox("Do you want to save this data now?", vbYesNo + vbExclamation, "Message Confirmation")
+    x = MsgBox("Do you want to save this data now?", vbYesNo + vbQuestion, "Message Confirmation")
 
     If x = vbNo Then Exit Function
     
@@ -76,6 +71,41 @@ Public Function Add(varStudentID, varStudentName, varStudentGender As String, va
     MsgBox "All Data is successfully Saved", vbInformation, "Message Information"
     
 fsAdd:
+
+End Function
+
+Public Function Update(varStudentID, varStudentName, varStudentGender As String, varStudentAge As Integer)
+
+    If Rs.State = 1 Then Rs.Close
+    
+    sql = "SELECT * FROM tbl_students WHERE student_ID = '" & varStudentID & "'"
+    
+    x = MsgBox("Do you want to update this data now?", vbYesNo + vbQuestion, "Message Information")
+    
+    If x = vbNo Then Exit Function
+    
+    If Not Rs.EOF Then
+        With Rs
+            .Update
+                .Fields(0) = varStudentID
+                .Fields(1) = varStudentName
+                .Fields(2) = varStudentGender
+                .Fields(3) = varStudentAge
+            .Update
+        End With
+    End If
+    
+    MsgBox "All Data is successfully Saved", vbInformation, "Message Information"
+
+End Function
+
+Public Function Delete(varStudentID, varStudentName, varStudentGender As String, varStudentAge As Integer)
+
+    If Rs.State = 1 Then Rs.Close
+    
+    sql = "DELETE * FROM tbl_student WHERE student_ID = '" & varStudentID & "'"
+    
+    Rs.Open sql, Con
 
 End Function
 
@@ -108,10 +138,8 @@ Public Function Display(grdMain As MSFlexGrid)
 
         x = .Width / 4
         
-        .Col = 0
         .ColWidth(0) = 350
-        
-        .Col = 2
+        .ColWidth(1) = x
         .ColWidth(2) = x
     End With
 
